@@ -111,6 +111,6 @@ class ClientController extends Controller
         $client->delete();
   
         return redirect()->route('clients.index')
-                        ->with('success','Cliente eliminado satisfactoriamente');
+            ->with('success','Cliente eliminado satisfactoriamente');
     }
 }

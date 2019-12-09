@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::resource('clients','ClientController');
+Route::resource('providers','ProveedoresController');
+Route::resource('categorias','CategoriasController');
+Route::post('categorias/destroy/{id}', 'CategoriasController@destroy');
 
 Auth::routes();
 

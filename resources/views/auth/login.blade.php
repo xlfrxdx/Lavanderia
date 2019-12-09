@@ -1,9 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Sistema Lavanderia </title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+</head>
+<body style="background-size: cover; background-image: url('../assets/img/lavanderia-fondo.jpeg');">
+  
+<div class="container">
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-5" style="margin-top:200px;">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -70,4 +77,8 @@
         </div>
     </div>
 </div>
-@endsection
+</div>
+   
+</body>
+</html>
+

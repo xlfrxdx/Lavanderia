@@ -14,7 +14,7 @@ class CategoriasController extends Controller
     public function index()
     {
         $Lista = Categoria::paginate();
-        return view('categoria.index', compact('Lista'));
+        return view('categorias.index', compact('Lista'));
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-        return view('categoria.create');
+        return view('categorias.create');
     }
 
     /**
@@ -39,11 +39,11 @@ class CategoriasController extends Controller
             echo('Super f xddd');
             return view('categorias.create');
         }else{
-            $categoria = new \App\Categoria;
-            $categoria->nombre = $request->get('nombre');
-            $categoria->descripcion = $request-get('descripcion');
-            $categoria->saved();
-            return redirect()->route('categoria.index')->with('info', 'Categoria guardada cone éxito');
+            $categoria = new Categoria;
+            $categoria->Nombre = $request->nombre;
+            $categoria->Descripcion = $request->descripcion;
+            $categoria->save();
+            return redirect()->route('categorias.index')->with('info', 'Categoría guardada con éxito');
         }
         
     }
@@ -70,7 +70,7 @@ class CategoriasController extends Controller
     public function edit($id)
     {
         $categoria = Categoria::find($id);
-         return view('categoria.editar', compact('categoria'));
+         return view('categorias.edit', compact('categoria'));
     }
 
     /**
@@ -82,11 +82,11 @@ class CategoriasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categoria = \App\Categoria::find($id);
-        $categoria->nombre = $request->get('nombre');
-        $categoria->descripcion = $request->get('descripcion');
+        $categoria = Categoria::find($id);
+        $categoria->Nombre = $request->nombre;
+        $categoria->Descripcion = $request->descripcion;
         $categoria->save();
-        return redirect()->route('categoria.index')->with('info', 'Categoria guardado con éxito');
+        return redirect()->route('categorias.index')->with('info', 'Categoría editada con éxito');
     }
 
     /**
@@ -97,10 +97,21 @@ class CategoriasController extends Controller
      */
     public function destroy($id)
     {
-            $categoria = \App\Categoria::find($id);
-            $categoria->delete();
-            return redirect()->route('categoria.index')->with('info', 'Categoria se ha elimina con éxito');
+        $categoria = Categoria::where('id', $id)->delete();       
 
+        // check data deleted or not
+        if ($categoria == 1) {
+            $success = true;
+            $message = "Categoría eliminada con éxito";
+        } else {
+            $success = false;
+            $message = "Error al eliminar categoría";
+        }
 
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
     }
 }
